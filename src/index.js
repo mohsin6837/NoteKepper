@@ -7,11 +7,7 @@ const notesRouter = require('./routers/notes')
 
 const app = express()
 const cors=require('cors')
-app.use(cors(
-    {
-        origin:"http://localhost:3000/"
-    }
-))
+app.use(cors())
 const port = process.env.PORT || 3000
 
 // Defined paths for Express config
