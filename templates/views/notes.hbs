@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Notes</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="main-content">
+    {{> header}}
+
+    <!-- Form for Adding a New Note -->
+    <form id="noteForm">
+        <input type="text" id="title" placeholder="Title" required>
+        <input type="text" id="tagline" placeholder="Tagline" required>
+        <textarea id="body" placeholder="Body" required></textarea>
+        <input type="checkbox" id="pinned"> Pin this note
+        <button type="submit">Add Note</button>
+        <div id="message-1"></div>
+    </form>
+
+    <!-- Notes Grid -->
+    <div id="notesGrid">
+        {{#each notes}}
+        <div class="note" data-note-id="{{this._id}}">
+            <h2>{{this.title}}</h2>
+            <p>{{this.tagline}}</p>
+            <div>{{this.body}}</div>
+            <div id="pie"></div>
+            <button class="editBtn" onclick="populateFormWithNoteData('{{this._id}}')">Edit</button>
+            <button class="deleteBtn" onclick="deleteNote('{{this._id}}')">Delete</button>
+        </div>
+        {{/each}}
+    </div>
+
+    <!-- Pagination Controls -->
+<div id="pagination">
+    {{#if previousPage}}
+    <a href="/?page={{previousPage}}&limit=6">Previous</a>
+    {{else}}
+    <span>Previous</span>
+    {{/if}}
+
+    Page {{currentPage}}
+
+    {{#if nextPage}}
+    <a href="/?page={{nextPage}}&limit=6">Next</a>
+    {{else}}
+    <span>Next</span>
+    {{/if}}
+</div>
+{{> footer}}
+</div>
+
+    <!-- JavaScript Files -->
+    <script src="/js/createnote.js"></script>
+    <script src="/js/editnote.js"></script>
+    <script src="/js/deletenote.js"></script>
+</body>
+</html>
