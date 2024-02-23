@@ -8,12 +8,18 @@ const notesRouter = require('./routers/notes')
 const app = express()
 const cors=require('cors')
 const corsConfig = {
-    origin: ["https://my-service-bofi.onrender.com", "http://localhost:3000"],
+    origin: ["https://keeper-app-latest.onrender.com","https://my-service-bofi.onrender.com", "http://localhost:3000"],
     credentials: true,
     methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
     allowedHeaders: ['Content-Type']
 };
 app.use(cors(corsConfig))
+app.use((req,res,next)=>{
+    res.setHeader('Access-Control-Allow-Origin','*')
+    res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE')
+    res.setHeader('Access-Control-Allow-Headers','Content-Type, Authorization')
+    next()
+})
 const port = process.env.PORT || 3000
 
 // Defined paths for Express config
